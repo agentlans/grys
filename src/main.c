@@ -98,9 +98,9 @@ int main(int argc, char** argv) {
     int pwd_ways = f + n + p;
     switch (pwd_ways) {
         case 0:
-            if (is_empty(in_filename)) {
+            if (is_empty(in_filename) || is_empty(out_filename)) {
                 // Can't read password from stdin when stdin is the input file!
-                show_error("No password has been specified. Please use the -f or -n options.");
+                show_error("No password specified. Please use the -p, -f, or -n options.");
                 return 1;
             } else {
                 // Ask user for password.
