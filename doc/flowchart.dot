@@ -1,0 +1,14 @@
+digraph {
+"Argon 2" [shape="rectangle"]
+"ChaCha20 Poly1305" [shape="rectangle"]
+"password" [color="red"]
+"plaintext" [color="red"]
+"salt" [color="blue"]
+"initialization vector" [color="blue"]
+"password" -> "Argon 2"
+"salt" -> "Argon 2"
+"Argon 2" -> "secret key"
+{"secret key" "plaintext" "initialization vector"} -> "ChaCha20 Poly1305"
+"ChaCha20 Poly1305" -> {"ciphertext" "authentication tag"}
+{"salt" "initialization vector" "authentication tag" "ciphertext"} -> "output file"
+}
