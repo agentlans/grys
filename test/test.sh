@@ -20,20 +20,20 @@ expect () {
 
 echo "Attention! You shouldn't see error messages below."
 
-./grys test/foo.dat /tmp/bar -e $PASSWORD_FLAG
+./grys -e $PASSWORD_FLAG test/foo.dat /tmp/bar
 expect "Encrypt file" success
 
-./grys /tmp/bar /tmp/foo -d $PASSWORD_FLAG
+./grys -d $PASSWORD_FLAG /tmp/bar /tmp/foo 
 expect "Decrypt file" success
 
 diff test/foo.dat /tmp/foo
 expect "Decrypted file matches" success
 
-./grys /tmp/bar "" -d -p WrongPassword > /dev/null 2>&1
+./grys -d -p WrongPassword /tmp/bar "" > /dev/null 2>&1
 expect "Wrong password fails to decrypt" fail
 
 shuf /tmp/bar -o /tmp/bar.shuf
-./grys /tmp/bar.shuf /tmp/bar2 -d $PASSWORD_FLAG > /dev/null 2>&1
+./grys -d $PASSWORD_FLAG /tmp/bar.shuf /tmp/bar2 > /dev/null 2>&1
 expect "Corrupted file fails to decrypt" fail
 
 echo "Tests finished."

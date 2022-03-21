@@ -1,7 +1,11 @@
 #include <stdio.h>
-#include <termios.h>
 #include <unistd.h>
 
+#ifdef __gnu_linux__
+#include <termios.h>
+#endif
+
+#ifdef __gnu_linux__
 // max_len: maximum length of password not including trailing NULL
 void ask_password(char* password, size_t max_len) {
 	// Keystroke detection based on 
@@ -37,6 +41,7 @@ void ask_password(char* password, size_t max_len) {
 	// To make up for the user's newline
 	printf("\n");
 }
+#endif
 
 // Reads up to max_len bytes into buf then appends a trailing NULL
 int read_string_from_file(char* buf, const char* filename, size_t max_len) {

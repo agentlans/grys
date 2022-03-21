@@ -104,8 +104,13 @@ int main(int argc, char** argv) {
                 return 1;
             } else {
                 // Ask user for password.
-		printf("Please enter password: ");
+                #ifdef __gnu_linux__
                 ask_password(pwd, max_password_len);
+                #else
+                // Password entry currently not implemented for Windows
+		show_error("Please use one of the password flags.");
+                return 1;
+                #endif
             }
             break;
         case 1:

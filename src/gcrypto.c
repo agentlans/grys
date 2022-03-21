@@ -162,4 +162,5 @@ int encrypt(FILE *in_file, FILE *out_file, const char *password) {
   fwrite(tag, 1, taglen, out_file);
   fflush(out_file);
   gcry_cipher_close(hd);
+  return 0;
 }
